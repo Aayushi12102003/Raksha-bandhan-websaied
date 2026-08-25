@@ -113,39 +113,38 @@ function createConfetti() {
    MUSIC BUTTON
 ========================= */
 
-const musicBtn =
-    document.getElementById("musicBtn");
-
-const music =
-    document.getElementById("music");
-
-let playing = false;
+const musicBtn = document.getElementById("musicBtn");
+const music = document.getElementById("music");
 
 musicBtn.addEventListener("click", () => {
 
-    if (!music.src) {
+    if (music.paused) {
 
-        alert(
-            "Add your music file in index.html first 🎵"
-        );
+        music.play()
+            .then(() => {
+                musicBtn.innerHTML = "⏸️";
+            })
+            .catch(() => {
+                alert("Music play nahi ho pa raha 🎵");
+            });
 
-        return;
-    }
-
-    if (playing) {
+    } else {
 
         music.pause();
 
         musicBtn.innerHTML = "🎵";
-
-        playing = false;
-
-    } else {
-
-        music.play();
-
-        musicBtn.innerHTML = "⏸️";
-
-        playing = true;
     }
+});
+const closeSurprise =
+    document.getElementById("closeSurprise");
+
+closeSurprise.addEventListener("click", () => {
+
+    surpriseSection.classList.remove("show");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
 });
